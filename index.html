@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Sena</title>
+    <style>
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: url(https://ganharnalotomania.com/blog/wp-content/uploads/2020/03/Os-20-N%C3%BAmeros-Mais-Sorteados-da-Lotomania.jpg);
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            
+        }
+
+        h1 {
+            text-align: center;
+            margin: 2rem 0 5rem 0;
+            color: white;
+            
+        }
+
+        .bloco-geral {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .superior {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            background: rgb(0, 0, 0, 0.75);
+            border-radius: 10px;
+            border: none;
+              
+        }
+
+        legend {
+           color: white; 
+           padding-top: 3rem;
+           font-size: 1.2rem;
+        }
+
+        #tipo-jogo{
+            border-radius: 5px;
+            padding: 0.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 0.3rem;
+            margin: 1rem 0 3rem 0;
+
+        }
+
+        .gerador-jogo {
+            border-radius: 10px;
+            border: none;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .gerador-jogo:hover {
+            background: rgb(237, 227, 174);
+            cursor: pointer;
+        }
+
+        .resultado {
+            border-radius: 5px;
+            width: 90%;
+            height: 45px;
+            background: white;
+            color: black;
+        }
+
+        .resultado__paragrafo {
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            margin: 0.4rem 0 0.2rem 0;
+            font-size: 1.3rem;
+            
+        }
+
+        .texto {
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            background: rgb(0, 0, 0, 0.75);
+            border-radius: 10px;
+            border: none;
+        }
+
+        .texto__titulo {
+            color: white;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 1.2rem 0;
+
+        }
+
+        .texto__paragrafo {
+            font-size: 1.3rem;
+            color: white;
+            padding-left: 2rem;
+        }
+        
+       footer p {
+        text-align: center;
+        margin: 3rem 0;
+        font-weight: 800;
+        color: white;
+       
+       }
+
+       @media screen and (max-width: 768px) {
+        h1 {
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .bloco-geral {
+            display: flex;
+            flex-direction: column-reverse;
+            
+        }
+
+        .texto {
+            height: 500px;
+            width: 90%;
+            margin: 0 auto;
+            
+        }
+
+        .texto__paragrafo {
+            font-size: 1.2rem;
+            width: 100%;
+            padding-left: 0.8rem;
+        }
+
+        .superior {
+            width: 90%;
+            margin: 0 auto;
+            height: 400px;
+            margin-top: 2rem;
+        }
+
+        .resultado {
+            width: 95%;
+            
+        }
+
+        .resultado__paragrafo {
+            font-size: 1rem;
+        }
+
+        footer p {
+            margin-top: 5rem;
+            
+        }
+        
+       }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Jogos da Loteria Federal</h1>
+    </header>
+    <main>
+        <div class="bloco-geral">
+            <div class="superior">
+                <legend>Escolha um tipo de jogo:</legend>
+                <select id="tipo-jogo">
+                    <option>Mega-Sena</option>
+                    <option>Lotofácil</option>
+                    <option>Quina</option>
+                    <option>Dupla-Sena</option>
+                </select>
+                <button class="gerador-jogo">clique aqui</button>
+                <div class="resultado">
+                    <p class="resultado__paragrafo"> </p> 
+                </div>
+            </div> 
+            <div class="texto">
+                <h2 class="texto__titulo">Mega-Sena</h2>
+                <p class="texto__paragrafo">Será gerado 6 números aleatórios entre 1 e 60</p>
+                <h2 class="texto__titulo">Lotofácil</h2>
+                <p class="texto__paragrafo">Será gerado 15 números aleatórios entre 1 e 25</p>
+                <h2 class="texto__titulo">Quina</h2>
+                <p class="texto__paragrafo">Será gerado 5 números aleatórios entre 1 e 80</p>
+                <h2 class="texto__titulo">Dupla-Sena</h2>
+                <p class="texto__paragrafo">Será gerado 15 números aleatórios entre 1 e 50</p>
+            </div> 
+        </div>
+    </main>
+    <footer>
+        <p>Desenvolvido por Martins - 2023</p>
+    </footer>
+
+    <script>
+        var tipoJogo = document.querySelector('#tipo-jogo')
+        var geradorJogo = document.querySelector('.gerador-jogo')
+        var resultado = document.querySelector('.resultado__paragrafo')
+       
+        geradorJogo.addEventListener('click', function geraJogo() {  
+            var jogoGerado = [] 
+            if(tipoJogo.value == 'Mega-Sena') {
+                cont = 0
+                while (cont <= 5) {
+                    var numeroAleatorio = Math.floor(Math.random() * 60) + 1 
+                    if(!jogoGerado.includes(numeroAleatorio)) {
+                        jogoGerado.push(numeroAleatorio)
+                        cont++
+                        
+                    }          
+                }   
+                resultado.innerHTML = jogoGerado
+            } 
+            
+            if(tipoJogo.value == 'Lotofácil') {
+                cont = 0
+                while (cont <= 14) {
+                    numeroAleatorio = Math.floor(Math.random() * 25) + 1 
+                    if(!jogoGerado.includes(numeroAleatorio)) {
+                        jogoGerado.push(numeroAleatorio)
+                        cont++
+                        
+                    }          
+                }   
+                resultado.innerHTML = jogoGerado 
+            }   
+
+            if(tipoJogo.value == 'Quina') {
+                cont = 0
+                while (cont <= 4) {
+                    numeroAleatorio = Math.floor(Math.random() * 80) + 1 
+                    if(!jogoGerado.includes(numeroAleatorio)) {
+                        jogoGerado.push(numeroAleatorio)
+                        cont++
+                        
+                    }          
+                }   
+                resultado.innerHTML = jogoGerado 
+            }   
+
+            if(tipoJogo.value == 'Dupla-Sena') {
+                cont = 0
+                while (cont <= 14) {
+                    numeroAleatorio = Math.floor(Math.random() * 50) + 1 
+                    if(!jogoGerado.includes(numeroAleatorio)) {
+                        jogoGerado.push(numeroAleatorio)
+                        cont++
+                        
+                    }          
+                }   
+                resultado.innerHTML = jogoGerado 
+            }                
+                
+        })
+
+    </script>
+</body>
+</html>
